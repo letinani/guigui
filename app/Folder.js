@@ -2,6 +2,7 @@ import createComponent from './createComponent'
 import Renderable from './Renderable'
 import { toggleClass, addClass, removeClass } from './utils/dom'
 import ColorPicker from './components/Colorpicker'
+import { saveFolder, saveComponent } from './saveGui'
 
 export default class Folder extends Renderable {
   constructor (folderName, options, domString = undefined) {
@@ -30,6 +31,8 @@ export default class Folder extends Renderable {
     this.$content = this.$el.querySelector('.' + options.classNames[0] + '-content')
     this.$head = this.$el.querySelector('.' + options.classNames[0] + '-head')
     this.$head.addEventListener('click', this.toggle)
+
+    saveFolder(this.state, folderName, options)
   }
 
   toggle () {
@@ -55,6 +58,7 @@ export default class Folder extends Renderable {
     const component = createComponent(object, property, array, options)
     this.components.push(component)
     component.appendTo(this.$content)
+    saveComponent(this.state, object, property, array, options)
     return component
   }
 

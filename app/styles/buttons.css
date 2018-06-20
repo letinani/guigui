@@ -65,3 +65,20 @@
 .guigui-folder--opened > .guigui-folder-head .guigui-folder-toggle-line:last-child{
   display: none;
 }
+
+.guigui-button {
+  @extend block;
+  position: absolute;
+  top: 0;
+  right: 40px;
+  line-height: 30px;
+  height: 30px;
+  width: 30px;
+  color: rgb(61, 119, 235);
+}
+
+.guigui-button svg {
+  height: 30px;
+  width: 30px;
+  fill: rgb(61, 119, 235);
+}

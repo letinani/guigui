@@ -1,4 +1,5 @@
 import Folder from './Folder'
+import { savePanel } from './saveGui'
 
 export default class Panel extends Folder {
   constructor (name = '') {
@@ -15,5 +16,7 @@ export default class Panel extends Folder {
       },
       domString
     )
+
+    this.state = savePanel(name)
   }
 }
