@@ -2,6 +2,7 @@ import Component from '../Component'
 import { format, clamp, toPrecision } from '../utils/maths'
 import { offset } from '../utils/dom'
 import '../styles/components/slider.css'
+import { saveComponentValue } from '../saveGui'
 
 export default class Slider extends Component {
   constructor (object, property, options = {}) {
@@ -32,6 +33,7 @@ export default class Slider extends Component {
     this.onTextDrag = this.onTextDrag.bind(this)
     this.onTextKeyDown = this.onTextKeyDown.bind(this)
     this.onTextChange = this.onTextChange.bind(this)
+    this.onJsonUpload = this.onJsonUpload.bind(this)
 
     this.isSlider = true
     this.step = step
@@ -59,6 +61,8 @@ export default class Slider extends Component {
 
     // set initial value
     this.value = this._targetObject[this._targetProperty]
+    this.on('upload', this.onJsonUpload)
+
   }
 
   get value () {
@@ -70,6 +74,7 @@ export default class Slider extends Component {
       this.sliderValue = clamp(toPrecision(value, this.step), this.min, this.max)
       this._value = this.sliderValue
       this.updateTarget().updateSlider().updateText()
+      saveComponentValue(this.uid, this.sliderValue)
       this.emit('update', this.sliderValue)
     }
   }
@@ -82,6 +87,13 @@ export default class Slider extends Component {
     this.onSliderStopDrag()
     this.onTextStopDrag()
     super.remove()
+  }
+
+  /* =============================================================================
+    Update Config from JSON
+  ============================================================================= */
+  onJsonUpload (value) {
+    this.value = value
   }
 
   /* =============================================================================
