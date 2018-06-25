@@ -33,3 +33,9 @@ guigui.add($subject, 'visible').on('update', toggleVisible)
 
 const folder = guigui.addFolder('a folder')
 folder.add($subject, 'wizz')
+
+const subfolder = folder.addFolder('subfolder')
+subfolder.add($subject, 'x', {min: -200, max: 200, step: 1}).on('update', moveSubject)
+
+const panel2 = guigui.addPanel('Second Panel')
+panel2.add($subject, 'x', {min: -200, max: 200, step: 1}).on('update', moveSubject)

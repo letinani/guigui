@@ -9,6 +9,7 @@
     "cover": "cross-env NODE_ENV=test NODE_PATH=app nyc ava",
     "lint": "standard",
     "build": "webpack -p",
+    "dev": "webpack -p -w",
     "deploy": "gh-pages -d demo"
   },
   "keywords": [],

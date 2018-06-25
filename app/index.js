@@ -1,9 +1,9 @@
 import Panel from './Panel'
 import CloseButton from './CloseButton'
-import SaveButton from './SaveButton'
+import ExportButton from './ExportButton'
 import { createElement, appendElement } from './utils/dom'
 import './styles/main.css'
-import { savePanel } from './saveGui';
+import GuiExporter from './GuiExporter'
 
 // TODO USE BUBLE ISTEAD OF BABEL
 // TODO USE MIT instead of component/emitter ?
@@ -16,6 +16,7 @@ function addPanel (name = '') {
     }
   }
   const panel = new Panel(name)
+  GuiExporter.savePanel(panel, panels.length)
   panels.push(panel)
   panel.appendTo($content)
   return panel
@@ -52,12 +53,12 @@ const panels = []
 const $el = createElement('div', 'guigui')
 const $content = createElement('div', 'guigui-container')
 const closeButton = new CloseButton($content, 'guigui-container')
-const saveButton = new SaveButton($content, 'guigui-container')
+const exportButton = new ExportButton($content, 'guigui-container')
 
 appendElement($el)
 appendElement($content, $el)
 closeButton.appendTo($el)
-saveButton.appendTo($el)
+exportButton.appendTo($el)
 
 module.exports = {
   addPanel,
