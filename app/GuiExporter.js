@@ -5,7 +5,7 @@ class GuiExporter {
 
   savePanel (panel, position) {
     let state = {
-      name: panel.name,
+      name: panel.folderName,
       uid: position.toString(),
       rows: []
     }
