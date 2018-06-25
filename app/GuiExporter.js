@@ -1,30 +1,30 @@
 class GuiExporter {
-  constructor() {
-    this.data = new Array()
+  constructor () {
+    this.data = []
   }
 
-  savePanel(panel, position) {
+  savePanel (panel, position) {
     let state = {
-      name: name,
+      name: panel.name,
       uid: position.toString(),
-      rows: new Array()
+      rows: []
     }
     panel.state = state
     console.log('SAVE::savepanel', state)
     return state
   }
 
-  saveFolder(state, folder) {
+  saveFolder (state, folder) {
     const folderData = {
       type: 'folder',
       uid: `${state.uid}-${state.rows.length}`,
-      rows: new Array()
+      rows: []
     }
     state.rows.push(folderData)
     folder.state = folderData
   }
 
-  saveComponent(state, component) {
+  saveComponent (state, component) {
     const componentData = {
       type: typeof component.value,
       uid: `${state.uid}-${state.rows.length}`,
@@ -36,7 +36,7 @@ class GuiExporter {
     console.log('SAVE::saveComponent::', this.data)
   }
 
-  saveColor(state, component) {
+  saveColor (state, component) {
     const componentData = {
       type: 'color',
       uid: `${state.uid}-${state.rows.length}`,
@@ -48,7 +48,7 @@ class GuiExporter {
     console.log('SAVE::saveColor::', this.data)
   }
 
-  updateSavedValue(uid, value) {
+  updateSavedValue (uid, value) {
     if (value === undefined || uid === undefined) return
     for (let i = 0; i < this.data.length; i++) {
       let savedComponent = this.data[i]
@@ -60,10 +60,10 @@ class GuiExporter {
     console.log('SAVE::updateValue::', this.data)
   }
 
-  exportToJson() {
+  exportToJson () {
     const json = JSON.stringify(this.data)
     console.log('SAVE::exportToJson', json)
-    const data = "text/json;charset=utf-8," + encodeURIComponent(json)
+    const data = 'text/json;charset=utf-8,' + encodeURIComponent(json)
     return data
   }
 }

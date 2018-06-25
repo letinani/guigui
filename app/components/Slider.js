@@ -62,7 +62,6 @@ export default class Slider extends Component {
     // set initial value
     this.value = this._targetObject[this._targetProperty]
     this.on('upload', this.onJsonUpload)
-
   }
 
   get value () {

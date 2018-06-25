@@ -24,7 +24,7 @@ $subject.wizz = () => {
   $subject.style.left = `${(Math.random() * 80 + 10)}%`
 }
 
-guigui.add($subject, 'x', {label: 'Super long ce label',min: -200, max: 200, step: 1}).on('update', moveSubject)
+guigui.add($subject, 'x', {min: -200, max: 200, step: 1}).on('update', moveSubject)
 guigui.add($subject, 'y', {min: -200, max: 200, step: 1}).on('update', moveSubject)
 guigui.add($title, 'innerHTML', {label: 'title'})
 guigui.add($subject, 'shape', ['square', 'circle']).on('update', changeShape)
