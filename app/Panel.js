@@ -1,5 +1,4 @@
 import Folder from './Folder'
-import { savePanel, saveFolder, saveComponent, saveColor } from './saveGui'
 
 export default class Panel extends Folder {
   constructor (name = '') {
@@ -16,27 +15,5 @@ export default class Panel extends Folder {
       },
       domString
     )
-
-    this.state = savePanel(name)
-    this.uid = this.state.uid
-  }
-
-  // addFolder(name, options = {}) {
-  //   let folder = super.addFolder(name, options = {})
-  //   console.log('addFolder', folder)
-  //   folder.uid = saveFolder(this.state)
-  //   return folder
-  // }
-
-  add(object, property, array, options) {
-    let component = super.add(object, property, array, options)
-    component.uid = saveComponent(this.state, component)
-    return component
-  }
-
-  addColor(object, property, options) {
-    let component = super.addColor(object, property, options)
-    component.uid = saveColor(this.state, component)
-    return component
   }
 }

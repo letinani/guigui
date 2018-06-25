@@ -1,7 +1,7 @@
 import Renderable from './Renderable'
-import { toggleClass } from './utils/dom'
-import { exportSaving } from './saveGui'
-export default class SaveButton extends Renderable {
+import GuiExporter from './GuiExporter'
+
+export default class ExportButton extends Renderable {
   constructor($container, containerClass) {
     const domString = `
       <a class="guigui-save-text" href="" download="guigui.json">
@@ -21,11 +21,10 @@ export default class SaveButton extends Renderable {
     this.containerClass = containerClass
 
     this.$el.addEventListener('click', this.toggle)
-    console.log('saving wip')
   }
 
   toggle() {
-    const data = exportSaving()
+    const data = GuiExporter.exportToJson()
     let link = this.$el.querySelector('a')
     link.href = `data:'${data}'`
   }

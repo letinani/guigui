@@ -2,7 +2,7 @@ import createComponent from './createComponent'
 import Renderable from './Renderable'
 import { toggleClass, addClass, removeClass } from './utils/dom'
 import ColorPicker from './components/Colorpicker'
-import { saveFolder } from './saveGui'
+import GuiExporter from './GuiExporter'
 
 export default class Folder extends Renderable {
   constructor (folderName, options, domString = undefined) {
@@ -27,13 +27,11 @@ export default class Folder extends Renderable {
     this.folderName = folderName
     this.components = []
     this.folders = []
+    this.rows = []
 
     this.$content = this.$el.querySelector('.' + options.classNames[0] + '-content')
     this.$head = this.$el.querySelector('.' + options.classNames[0] + '-head')
     this.$head.addEventListener('click', this.toggle)
-
-    // this.state = {}
-    // this.uid = this.state.uid
   }
 
   toggle () {
@@ -54,7 +52,7 @@ export default class Folder extends Renderable {
     folder.appendTo(this.$content)
     if (this.state) {
       console.log('STATE', this.state)
-      folder.uid = saveFolder(this.state)
+      GuiExporter.saveFolder(this.state, folder)
     }
     return folder
   }
@@ -63,6 +61,7 @@ export default class Folder extends Renderable {
     const component = createComponent(object, property, array, options)
     this.components.push(component)
     component.appendTo(this.$content)
+    GuiExporter.saveComponent(this.state, component)
     return component
   }
 
@@ -70,6 +69,7 @@ export default class Folder extends Renderable {
     const component = new ColorPicker(object, property, options)
     this.components.push(component)
     component.appendTo(this.$content)
+    GuiExporter.saveColor(this.state, component)
     return component
   }
 

@@ -1,6 +1,7 @@
 import Component from '../Component'
 import { addClass, removeClass } from '../utils/dom'
 import '../styles/components/toggler.css'
+import GuiExporter from '../GuiExporter'
 
 export default class Toggler extends Component {
   constructor (object, property, options = {}) {
@@ -45,6 +46,7 @@ export default class Toggler extends Component {
       removeClass(this.$el, 'guigui-toggler--selected')
     }
     this._targetObject[this._targetProperty] = value
+    GuiExporter.updateSavedValue(this.uid, value)
     this.emit('update', value)
   }
 }
