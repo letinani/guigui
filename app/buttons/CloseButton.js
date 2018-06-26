@@ -1,5 +1,5 @@
-import Renderable from './Renderable'
-import { toggleClass } from './utils/dom'
+import Renderable from '../Renderable'
+import { toggleClass } from '../utils/dom'
 
 export default class CloseButton extends Renderable {
   constructor ($container, containerClass) {

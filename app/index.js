@@ -1,6 +1,6 @@
 import Panel from './Panel'
-import CloseButton from './CloseButton'
-import ExportButton from './ExportButton'
+import CloseButton from './buttons/CloseButton'
+import ExportButton from './buttons/ExportButton'
 import { createElement, appendElement } from './utils/dom'
 import './styles/main.css'
 import GuiExporter from './GuiExporter'
@@ -58,7 +58,7 @@ const exportButton = new ExportButton($content, 'guigui-container')
 appendElement($el)
 appendElement($content, $el)
 closeButton.appendTo($el)
-exportButton.appendTo($el)
+exportButton.appendTo($content)
 
 module.exports = {
   addPanel,

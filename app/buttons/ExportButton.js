@@ -1,5 +1,5 @@
-import Renderable from './Renderable'
-import GuiExporter from './GuiExporter'
+import Renderable from '../Renderable'
+import GuiExporter from '../GuiExporter'
 
 export default class ExportButton extends Renderable {
   constructor ($container, containerClass) {
