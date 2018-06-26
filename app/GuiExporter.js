@@ -60,8 +60,12 @@ class GuiExporter {
     console.log('SAVE::updateValue::', this.data)
   }
 
+  dataToJson () {
+    return JSON.stringify(this.data)
+  }
+
   exportToJson () {
-    const json = JSON.stringify(this.data)
+    const json = this.dataToJson()
     console.log('SAVE::exportToJson', json)
     const data = 'text/json;charset=utf-8,' + encodeURIComponent(json)
     return data
