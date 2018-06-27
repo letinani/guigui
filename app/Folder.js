@@ -27,7 +27,6 @@ export default class Folder extends Renderable {
     this.folderName = folderName
     this.components = []
     this.folders = []
-    this.rows = []
 
     this.$content = this.$el.querySelector('.' + options.classNames[0] + '-content')
     this.$head = this.$el.querySelector('.' + options.classNames[0] + '-head')
@@ -52,7 +51,7 @@ export default class Folder extends Renderable {
     folder.appendTo(this.$content)
     if (this.state) {
       console.log('STATE', this.state)
-      GuiExporter.saveFolder(this.state, folder)
+      GuiExporter.saveFolder(this.state, folder, this.folders.length - 1)
     }
     return folder
   }
@@ -61,7 +60,7 @@ export default class Folder extends Renderable {
     const component = createComponent(object, property, array, options)
     this.components.push(component)
     component.appendTo(this.$content)
-    GuiExporter.saveComponent(this.state, component)
+    GuiExporter.saveComponent(this.state, component, this.components.length - 1)
     return component
   }
 
@@ -69,7 +68,7 @@ export default class Folder extends Renderable {
     const component = new ColorPicker(object, property, options)
     this.components.push(component)
     component.appendTo(this.$content)
-    GuiExporter.saveColor(this.state, component)
+    GuiExporter.saveColor(this.state, component, this.components.length - 1)
     return component
   }
 

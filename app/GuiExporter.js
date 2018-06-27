@@ -7,43 +7,40 @@ class GuiExporter {
     let state = {
       name: panel.folderName,
       uid: position.toString(),
-      rows: []
     }
     panel.state = state
     console.log('SAVE::savepanel', state)
     return state
   }
 
-  saveFolder (state, folder) {
+  saveFolder (state, folder, position) {
     const folderData = {
       type: 'folder',
-      uid: `${state.uid}-${state.rows.length}`,
-      rows: []
+      uid: `${state.uid}-${position}`,
     }
-    state.rows.push(folderData)
     folder.state = folderData
   }
 
-  saveComponent (state, component) {
+  saveComponent (state, component, position) {
     const componentData = {
       type: typeof component.value,
-      uid: `${state.uid}-${state.rows.length}`,
+      uid: `${state.uid}-${position}`,
       value: component.value
     }
-    state.rows.push(componentData)
     component.uid = componentData.uid
+    component.type = componentData.type
     if (componentData.value !== undefined) this.data.push(componentData)
     console.log('SAVE::saveComponent::', this.data)
   }
 
-  saveColor (state, component) {
+  saveColor (state, component, position) {
     const componentData = {
       type: 'color',
-      uid: `${state.uid}-${state.rows.length}`,
+      uid: `${state.uid}-${position}`,
       value: component.getColor()
     }
-    state.rows.push(componentData)
     component.uid = componentData.uid
+    component.type = componentData.type
     if (componentData.value !== undefined) this.data.push(componentData)
     console.log('SAVE::saveColor::', this.data)
   }
@@ -60,8 +57,12 @@ class GuiExporter {
     console.log('SAVE::updateValue::', this.data)
   }
 
+  dataToJson () {
+    return JSON.stringify(this.data)
+  }
+
   exportToJson () {
-    const json = JSON.stringify(this.data)
+    const json = this.dataToJson()
     console.log('SAVE::exportToJson', json)
     const data = 'text/json;charset=utf-8,' + encodeURIComponent(json)
     return data

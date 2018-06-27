@@ -1,5 +1,5 @@
-import Renderable from './Renderable'
-import GuiExporter from './GuiExporter'
+import Renderable from '../Renderable'
+import GuiExporter from '../GuiExporter'
 
 export default class ExportButton extends Renderable {
   constructor ($container, containerClass) {
@@ -26,6 +26,6 @@ export default class ExportButton extends Renderable {
   toggle () {
     const data = GuiExporter.exportToJson()
     let link = this.$el.querySelector('a')
-    link.href = `data:'${data}'`
+    link.href = `data:${data}`
   }
 }
