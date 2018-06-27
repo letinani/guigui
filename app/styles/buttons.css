@@ -75,10 +75,28 @@
   height: 30px;
   width: 30px;
   color: rgb(61, 119, 235);
+  cursor: pointer;
 }
 
 .guigui-button svg {
   height: 30px;
   width: 30px;
   fill: rgb(61, 119, 235);
+}
+
+.guigui-upload {
+  right: 80px;
+}
+
+.guigui-upload input {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.guigui-upload svg {
+  transform: rotate(180deg)
 }

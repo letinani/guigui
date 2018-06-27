@@ -1,9 +1,11 @@
 import Panel from './Panel'
 import CloseButton from './buttons/CloseButton'
 import ExportButton from './buttons/ExportButton'
+import UploadButton from './buttons/UploadButton'
 import { createElement, appendElement } from './utils/dom'
 import './styles/main.css'
 import GuiExporter from './GuiExporter'
+import GuiUploader from './GuiUploader'
 
 // TODO USE BUBLE ISTEAD OF BABEL
 // TODO USE MIT instead of component/emitter ?
@@ -18,6 +20,7 @@ function addPanel (name = '') {
   const panel = new Panel(name)
   GuiExporter.savePanel(panel, panels.length)
   panels.push(panel)
+  guiUploader.panels = panels
   panel.appendTo($content)
   return panel
 }
@@ -49,16 +52,24 @@ function getFirstPanel () {
   return getPanel(0) || addPanel()
 }
 
+function update (json) {
+  guiUploader.updateGui(json)
+  return json
+}
+
+const guiUploader = new GuiUploader()
 const panels = []
 const $el = createElement('div', 'guigui')
 const $content = createElement('div', 'guigui-container')
 const closeButton = new CloseButton($content, 'guigui-container')
 const exportButton = new ExportButton($content, 'guigui-container')
+const uploadButton = new UploadButton($content, 'guigui-container', guiUploader)
 
 appendElement($el)
 appendElement($content, $el)
 closeButton.appendTo($el)
 exportButton.appendTo($content)
+uploadButton.appendTo($content)
 
 module.exports = {
   addPanel,
@@ -66,5 +77,6 @@ module.exports = {
   add,
   addColor,
   addColorPicker,
-  getPanel
+  getPanel,
+  update
 }
