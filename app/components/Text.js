@@ -1,6 +1,6 @@
 import Component from '../Component'
 import '../styles/components/text.css'
-import GuiExporter from '../GuiExporter'
+import exporter from '../Exporter'
 
 export default class Text extends Component {
   constructor (object, property, options = {}) {
@@ -35,7 +35,7 @@ export default class Text extends Component {
     this.$input.value = value
     this._value = value
     this._targetObject[this._targetProperty] = value
-    GuiExporter.updateSavedValue(this.uid, value)
+    exporter.updateSavedValue(this.uid, value)
     this.emit('update', this.sliderValue)
   }
 }

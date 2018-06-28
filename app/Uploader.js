@@ -1,22 +1,25 @@
-export default class GuiUploader {
+export default class Uploader {
   constructor (panels) {
     this.panels = panels
   }
 
   parseJson (json) {
-    return JSON.parse(json)
+    try {
+      return JSON.parse(json)
+    } catch (e) {
+	    console.warn(e)
+      return false
+    }
   }
 
-  validateJson () {
-    
-  }
-
-  updateGui(json) {
+  updateGui (json) {
     const jsonParsed = this.parseJson(json)
     if (!jsonParsed) return
   
     for (let i = 0; i < jsonParsed.length; i++) {
       let data = jsonParsed[i]
+      if (data.uid === undefined)
+        console.warn('this data is not compatible that gui')
       let ids = data.uid.split('-')
       const panel = this.panels[ids[0]]
       const component = this.lookThroughGui(panel, 1, ids)
@@ -24,10 +27,10 @@ export default class GuiUploader {
     }
   }
 
-  updataComponent(component, data) {
+  updataComponent (component, data) {
     // check uid
     if (data.uid !== component.uid) {
-      return console.warn('this data does not exists in that gui: ', data)
+      return console.warn('this data is not compatible that gui: ', data)
     }
     // check type
     if (data.type !== component.type) {
@@ -46,7 +49,7 @@ export default class GuiUploader {
     }
   }
 
-  lookThroughGui(object, index, parsedUid) {
+  lookThroughGui (object, index, parsedUid) {
     const currentBranch = parsedUid[index]
     if (index === parsedUid.length - 1) {
       return object.components[currentBranch]

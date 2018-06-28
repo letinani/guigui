@@ -1,9 +1,7 @@
 import Renderable from '../Renderable'
-import GuiExporter from '../GuiExporter'
-import { update } from '../'
 
 export default class UploadButton extends Renderable {
-  constructor ($container, containerClass, guiUploader) {
+  constructor ($container, containerClass, uploader) {
     const domString = `
       <div class="guigui-upload-text">
         <input type="file" name="file" id="file" class="input-file" accept=".json">
@@ -20,8 +18,8 @@ export default class UploadButton extends Renderable {
       domString
     )
     this.onFile = this.onFile.bind(this)
-    this.guiUploader = guiUploader
-    console.log(this.guiUploader)
+    this.uploader = uploader
+    console.log(this.uploader)
     this.$container = $container
     this.containerClass = containerClass
 
@@ -36,7 +34,7 @@ export default class UploadButton extends Renderable {
       reader.readAsText(file)
       reader.onload = (e) => {
         console.log(e.target.result)
-        this.guiUploader.updateGui(e.target.result)
+        this.uploader.updateGui(e.target.result)
       }
     }
   }
