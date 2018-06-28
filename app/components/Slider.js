@@ -2,7 +2,7 @@ import Component from '../Component'
 import { format, clamp, toPrecision } from '../utils/maths'
 import { offset } from '../utils/dom'
 import '../styles/components/slider.css'
-import GuiExporter from '../GuiExporter'
+import exporter from '../Exporter'
 
 export default class Slider extends Component {
   constructor (object, property, options = {}) {
@@ -73,7 +73,7 @@ export default class Slider extends Component {
       this.sliderValue = clamp(toPrecision(value, this.step), this.min, this.max)
       this._value = this.sliderValue
       this.updateTarget().updateSlider().updateText()
-      GuiExporter.updateSavedValue(this.uid, this.sliderValue)
+      exporter.updateSavedValue(this.uid, this.sliderValue)
       this.emit('update', this.sliderValue)
     }
   }

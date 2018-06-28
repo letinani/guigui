@@ -1,7 +1,7 @@
 import Component from '../Component'
 import {isObject, isArray} from '../utils/types'
 import '../styles/components/select.css'
-import GuiExporter from '../GuiExporter'
+import exporter from '../Exporter'
 
 export default class Select extends Component {
   constructor (object, property, array, options = {}) {
@@ -53,7 +53,7 @@ export default class Select extends Component {
     this.$select.value = value
     this._value = value
     this._targetObject[this._targetProperty] = value
-    GuiExporter.updateSavedValue(this.uid, value)
+    exporter.updateSavedValue(this.uid, value)
     this.emit('update', this.sliderValue)
   }
 }

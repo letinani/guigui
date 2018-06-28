@@ -1,4 +1,4 @@
-class GuiExporter {
+class Exporter {
   constructor () {
     this.data = []
   }
@@ -9,7 +9,6 @@ class GuiExporter {
       uid: position.toString(),
     }
     panel.state = state
-    console.log('SAVE::savepanel', state)
     return state
   }
 
@@ -30,7 +29,6 @@ class GuiExporter {
     component.uid = componentData.uid
     component.type = componentData.type
     if (componentData.value !== undefined) this.data.push(componentData)
-    console.log('SAVE::saveComponent::', this.data)
   }
 
   saveColor (state, component, position) {
@@ -42,7 +40,6 @@ class GuiExporter {
     component.uid = componentData.uid
     component.type = componentData.type
     if (componentData.value !== undefined) this.data.push(componentData)
-    console.log('SAVE::saveColor::', this.data)
   }
 
   updateSavedValue (uid, value) {
@@ -54,7 +51,6 @@ class GuiExporter {
         break
       }
     }
-    console.log('SAVE::updateValue::', this.data)
   }
 
   dataToJson () {
@@ -63,10 +59,9 @@ class GuiExporter {
 
   exportToJson () {
     const json = this.dataToJson()
-    console.log('SAVE::exportToJson', json)
     const data = 'text/json;charset=utf-8,' + encodeURIComponent(json)
     return data
   }
 }
 
-export default new GuiExporter()
+export default new Exporter()

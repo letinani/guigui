@@ -4,8 +4,8 @@ import ExportButton from './buttons/ExportButton'
 import UploadButton from './buttons/UploadButton'
 import { createElement, appendElement } from './utils/dom'
 import './styles/main.css'
-import GuiExporter from './GuiExporter'
-import GuiUploader from './GuiUploader'
+import exporter from './Exporter'
+import Uploader from './Uploader'
 
 // TODO USE BUBLE ISTEAD OF BABEL
 // TODO USE MIT instead of component/emitter ?
@@ -17,11 +17,13 @@ function addPanel (name = '') {
       name += ' ' + (panels.length + 1)
     }
   }
+
   const panel = new Panel(name)
-  GuiExporter.savePanel(panel, panels.length)
   panels.push(panel)
-  guiUploader.panels = panels
   panel.appendTo($content)
+
+  exporter.savePanel(panel, panels.length - 1)
+  uploader.panels = panels
   return panel
 }
 
@@ -53,17 +55,17 @@ function getFirstPanel () {
 }
 
 function update (json) {
-  guiUploader.updateGui(json)
+  uploader.updateGui(json)
   return json
 }
 
-const guiUploader = new GuiUploader()
+const uploader = new Uploader()
 const panels = []
 const $el = createElement('div', 'guigui')
 const $content = createElement('div', 'guigui-container')
 const closeButton = new CloseButton($content, 'guigui-container')
 const exportButton = new ExportButton($content, 'guigui-container')
-const uploadButton = new UploadButton($content, 'guigui-container', guiUploader)
+const uploadButton = new UploadButton($content, 'guigui-container', uploader)
 
 appendElement($el)
 appendElement($content, $el)

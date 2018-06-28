@@ -3,7 +3,7 @@ import { addClass, removeClass } from '../utils/dom'
 import { isNumber, isThreejsColor } from '../utils/types'
 import SimpleColorPicker from 'simple-color-picker'
 import '../styles/components/colorpicker.css'
-import GuiExporter from '../GuiExporter'
+import exporter from '../Exporter'
 
 export default class Colorpicker extends Component {
   constructor (object, property, options = {}) {
@@ -122,7 +122,7 @@ export default class Colorpicker extends Component {
     } else {
       this._targetObject[this._targetProperty] = formatedColor
     }
-    GuiExporter.updateSavedValue(this.uid, formatedColor)
+    exporter.updateSavedValue(this.uid, formatedColor)
     this.emit('update', formatedColor)
   }
 }

@@ -2,7 +2,7 @@ import createComponent from './createComponent'
 import Renderable from './Renderable'
 import { toggleClass, addClass, removeClass } from './utils/dom'
 import ColorPicker from './components/Colorpicker'
-import GuiExporter from './GuiExporter'
+import exporter from './Exporter'
 
 export default class Folder extends Renderable {
   constructor (folderName, options, domString = undefined) {
@@ -51,7 +51,7 @@ export default class Folder extends Renderable {
     folder.appendTo(this.$content)
     if (this.state) {
       console.log('STATE', this.state)
-      GuiExporter.saveFolder(this.state, folder, this.folders.length - 1)
+      exporter.saveFolder(this.state, folder, this.folders.length - 1)
     }
     return folder
   }
@@ -60,7 +60,7 @@ export default class Folder extends Renderable {
     const component = createComponent(object, property, array, options)
     this.components.push(component)
     component.appendTo(this.$content)
-    GuiExporter.saveComponent(this.state, component, this.components.length - 1)
+    exporter.saveComponent(this.state, component, this.components.length - 1)
     return component
   }
 
@@ -68,7 +68,7 @@ export default class Folder extends Renderable {
     const component = new ColorPicker(object, property, options)
     this.components.push(component)
     component.appendTo(this.$content)
-    GuiExporter.saveColor(this.state, component, this.components.length - 1)
+    exporter.saveColor(this.state, component, this.components.length - 1)
     return component
   }
 
