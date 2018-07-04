@@ -16,7 +16,6 @@ test('save an empty panel', t => {
   t.is(p.folderName, 'settings') // normaly should be in a full test for Panel
   t.not(p.state, undefined)
   t.is(p.state.uid, '0')
-  t.is(p.state.rows.length, 0)
   t.is(exporter.data.length, 0)
 })
 
