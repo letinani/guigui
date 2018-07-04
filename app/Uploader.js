@@ -1,6 +1,6 @@
 export default class Uploader {
   constructor (panels) {
-    this.panels = panels
+    this.panels = panels || []
   }
 
   parseJson (json) {
@@ -13,6 +13,7 @@ export default class Uploader {
   }
 
   updateGui (json) {
+    // console.log('uup', json)
     const jsonParsed = this.parseJson(json)
     if (!jsonParsed) return
   
