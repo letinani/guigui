@@ -50,7 +50,6 @@ export default class Folder extends Renderable {
     this.folders.push(folder)
     folder.appendTo(this.$content)
     if (this.state) {
-      console.log('STATE', this.state)
       exporter.saveFolder(this.state, folder, this.folders.length - 1)
     }
     return folder
